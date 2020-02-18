@@ -3,13 +3,15 @@ from flask_restful import Api
 from task import Task
 import os
 from db import db 
-
+from flask_cors import CORS
 app=Flask(__name__)
+CORS(app)
 app.secret_key='msd'
 
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://uPlRJGzDnQ:pl5hFq8Fap@remotemysql.com/uPlRJGzDnQ'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 api=Api(app)
 

@@ -20,7 +20,7 @@ class TaskDialog extends Component {
     event.preventDefault();
 
     let newTask = {
-      id: Math.random(),
+      
       task: this.taskInput.current.value,
       status: false,
       createdAt : new Date(),
@@ -64,5 +64,4 @@ class TaskDialog extends Component {
     );
   }
 }
-
 export default withStyles(styles)(TaskDialog);

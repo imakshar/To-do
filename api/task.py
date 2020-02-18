@@ -1,7 +1,7 @@
 from flask_restful import Resource
-from flask import request
+from flask import request,jsonify
 from db import db
-
+import datetime
 class TaskModel(db.Model):
     __tablename__='tasks'
     # id = db.Column(db.Integer, primary_key=True,default=1)
@@ -37,7 +37,7 @@ class Task(Resource):
             
             user = TaskModel(task,status,createdAt,completedAt)
             user.save_to_db()
-            return {"message":"data added"}, 201
+            return {"id":user.id}, 201
         except:
             return {"message":"Add task method failed!"},500    
     
@@ -48,5 +48,21 @@ class Task(Resource):
         except:
             return {"message":"Can't get the task"},500
 
+    def put(self):
+        
+        data =request.get_json()
+        id = data['id']
+        status = data['status']
+
+        # task = TaskModel.query.filter_by(id=id).first()
+         
+        
+        task = TaskModel.query.filter_by(id=id).first()
+        task.status = status
+        task.completedAt = datetime.datetime.now()
+        db.session.commit()
+        return {"message":"data updated"}
+        # return jsonify(task)
+       
 
 
