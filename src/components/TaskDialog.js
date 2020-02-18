@@ -6,7 +6,8 @@ import {
   Grid,
   Button,
   withStyles,
-  DialogActions
+  DialogActions,
+  Typography
 } from "@material-ui/core";
 
 const styles = {
@@ -20,11 +21,10 @@ class TaskDialog extends Component {
     event.preventDefault();
 
     let newTask = {
-      
       task: this.taskInput.current.value,
       status: false,
-      createdAt : new Date(),
-      completedAt : null 
+      createdAt: new Date(),
+      completedAt: null
     };
     this.props.onSave(newTask);
   };
@@ -39,9 +39,12 @@ class TaskDialog extends Component {
         open={open}
       >
         <form onSubmit={this.handleSave}>
-          <DialogTitle id="simple-dialog-title" color="primary">
-            Add Task Details
+          <DialogTitle id="simple-dialog-title">
+            <Typography variant="h5" color="primary">
+              Add Task Details
+            </Typography>
           </DialogTitle>
+          
           <Grid container className={classes.GridSpace}>
             <Grid item>
               <TextField
@@ -54,6 +57,7 @@ class TaskDialog extends Component {
               />
             </Grid>
           </Grid>
+          
           <DialogActions>
             <Button color="primary" variant="contained" type="submit">
               Add

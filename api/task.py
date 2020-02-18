@@ -53,16 +53,20 @@ class Task(Resource):
         data =request.get_json()
         id = data['id']
         status = data['status']
-
+        completedAt = data['completedAt']
         # task = TaskModel.query.filter_by(id=id).first()
          
         
         task = TaskModel.query.filter_by(id=id).first()
         task.status = status
-        task.completedAt = datetime.datetime.now()
+        task.completedAt = completedAt 
         db.session.commit()
         return {"message":"data updated"}
-        # return jsonify(task)
-       
 
+    def delete(self):
+        # get perameters
+        id=request.args.get('id')
+        task = TaskModel.query.filter_by(id=id).delete()
+        db.session.commit()
+        return {"message":"deleted"}, 200
 
