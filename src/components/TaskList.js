@@ -13,7 +13,6 @@ import {
   withStyles,
   ListItemSecondaryAction
 } from "@material-ui/core";
-import { deepOrange } from "@material-ui/core/colors";
 import TimeAgo from "react-timeago";
 
 const styles= {
