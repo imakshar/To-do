@@ -5,22 +5,33 @@ import {
   ListItemIcon,
   ListItemAvatar,
   ListItemText,
-  Button,
+  IconButton,
   Avatar,
+  Typography,
   Icon,
-  Checkbox
+  Checkbox,
+  withStyles,
+  ListItemSecondaryAction
 } from "@material-ui/core";
 import { deepOrange } from "@material-ui/core/colors";
 import TimeAgo from "react-timeago";
 
-export default class TaskList extends Component {
+const styles= {
+  inline: {
+    display: 'inline',
+  }
+}
+
+class TaskList extends Component {
+
   render() {
     const {
       taskList,
       handleOnchange,
       handleDelete,
       checkBoxChecked,
-      iconColor
+      iconColor,
+      
     } = this.props;
 
     return (
@@ -43,7 +54,8 @@ export default class TaskList extends Component {
               </ListItemAvatar>
 
               <ListItemText
-                primary={item.task}
+                primary= {<Typography variant="body2" gutterBottom noWrap>{item.task}</Typography>}
+                disableTypography
                 secondary={
                   <TimeAgo
                     date={checkBoxChecked ? item.completedAt : item.createdAt}
@@ -51,14 +63,19 @@ export default class TaskList extends Component {
                   />
                 }
               />
+              <ListItemSecondaryAction>
 
-              <Button
+              <IconButton
                 variant="contained"
-                style={{ backgroundColor: deepOrange[900] }}
+                // style={{ backgroundColor: deepOrange[900] ,color:"secondary"}}
                 onClick={() => handleDelete(item.id)}
               >
-                Clear Task
-              </Button>
+                <Icon color={iconColor}> delete </Icon>
+                
+              </IconButton>
+
+              </ListItemSecondaryAction>
+             
             </ListItem>
           ))}
         </List>
@@ -66,3 +83,5 @@ export default class TaskList extends Component {
     );
   }
 }
+
+export default withStyles(styles)(TaskList);

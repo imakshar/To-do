@@ -39,7 +39,7 @@ class TaskDialog extends Component {
         open={open}
       >
         <form onSubmit={this.handleSave}>
-          <DialogTitle id="simple-dialog-title">
+          <DialogTitle id="simple-dialog-title" disableTypography>
             <Typography variant="h5" color="primary">
               Add Task Details
             </Typography>
